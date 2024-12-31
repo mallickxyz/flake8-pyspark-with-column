@@ -1,0 +1,28 @@
+name: Flake8 Pull Request Check
+
+on:
+  pull_request:
+    branches:
+      - test-main 
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Validate code
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install python3-pip
+        sudo apt install virtualenv python3-virtualenv -y
+        virtualenv -p /usr/bin/python3 testpip
+        source testpip/bin/activate
+        pip install flake8-pyspark-with-column 
+        flake8 --select PSRPK001,PSPRT002,PSPRK003,PSPRK004
+    - name: Run Flake8 Check
+      run: flake8 test/run_test.py
