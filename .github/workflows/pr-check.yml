@@ -3,7 +3,7 @@ name: Flake8 Pull Request Check
 on:
   pull_request:
     branches:
-      - test-main 
+      - main 
 
 jobs:
   lint:
