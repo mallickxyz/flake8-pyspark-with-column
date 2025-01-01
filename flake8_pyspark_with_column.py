@@ -8,7 +8,7 @@ class Plugin:
     name = "flake8-pyspark-with-columm"
     version = "0.1.0"
 
-    # Fake comments to check workflow
+    # Modify comments to check workflow
     def __init__(self, tree: ast.AST) -> None:
         self._tree = tree
         self._visited_nodes = set()  # To avoid multiple messages for nested loops
